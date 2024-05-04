@@ -8,11 +8,8 @@ public class FourBallsChallenge extends PApplet {
     public static final int BALL_HEIGHT = 10;
     public static final int BALL_SPEED = 1;
     public static final int DISTANCE_FACTOR = 5;
-
-    private int ball1positionX = 1;
-    private int ball2positionX = 1;
-    private int ball3positionX = 1;
-    private int ball4positionX = 1;
+    public static final int BALLS_COUNT = 4;
+    private final float[] xPositionsOfBalls = { 1F,1F,1F,1F};
 
     public static void main(String[] args) {
         PApplet.main("FourBallsChallenge", args);
@@ -25,41 +22,18 @@ public class FourBallsChallenge extends PApplet {
 
     @Override
     public void draw() {
-        drawBall1();
-        drawBall2();
-        drawBall3();
-        drawBall4();
+        for(int ballNumber = 1; ballNumber <= BALLS_COUNT; ballNumber++){
+            int ballIndex = ballNumber - 1;
+            drawBall(ballNumber, xPositionsOfBalls, ballIndex);
+        }
     }
 
-    private void drawBall1() {
-        final int ballNumber = 1;
+    private void drawBall(int ballNumber, float[] ballPositions, int ballIndex) {
         final float distanceFromTop = ballNumber * ((float) SCREEN_HEIGHT / DISTANCE_FACTOR);
-        ellipse(ball1positionX, distanceFromTop, BALL_WIDTH, BALL_HEIGHT);
+        ellipse(ballPositions[ballIndex], distanceFromTop, BALL_WIDTH, BALL_HEIGHT);
         int moveByDistance = BALL_SPEED * ballNumber;
-        ball1positionX += moveByDistance;
+        ballPositions[ballIndex] += moveByDistance;
     }
 
-    private void drawBall2() {
-        final int ballNumber = 2;
-        final float distanceFromTop = ballNumber * ((float) SCREEN_HEIGHT / DISTANCE_FACTOR);
-        ellipse(ball2positionX, distanceFromTop, BALL_WIDTH, BALL_HEIGHT);
-        int moveByDistance = BALL_SPEED * ballNumber;
-        ball2positionX += moveByDistance;
-    }
-
-    private void drawBall3() {
-        final int ballNumber = 3;
-        final float distanceFromTop = ballNumber * ((float) SCREEN_HEIGHT / DISTANCE_FACTOR);
-        ellipse(ball3positionX, distanceFromTop, BALL_WIDTH, BALL_HEIGHT);
-        int moveByDistance = BALL_SPEED * ballNumber;
-        ball3positionX += moveByDistance;
-    }
-
-    private void drawBall4() {
-        final int ballNumber = 4;
-        final float distanceFromTop = ballNumber * ((float) SCREEN_HEIGHT / DISTANCE_FACTOR);
-        ellipse(ball4positionX, distanceFromTop, BALL_WIDTH, BALL_HEIGHT);
-        int moveByDistance = BALL_SPEED * ballNumber;
-        ball4positionX += moveByDistance;
-    }
+    
 }
